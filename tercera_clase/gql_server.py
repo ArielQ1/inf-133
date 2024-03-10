@@ -27,8 +27,9 @@ class Query(ObjectType):
     estudiantes = List(Estudiante)
     
     def resolve_estudiantes(root, info):
-        print(estudiantes)
         return estudiantes
+    
+schema = Schema(query=Query)
     
 class GraphQLRequestHandler(BaseHTTPRequestHandler):
     def response_handler(self, status, data):
@@ -42,7 +43,7 @@ class GraphQLRequestHandler(BaseHTTPRequestHandler):
             content_length = int(self.headers["Content-Length"])
             data = self.rfile.read(content_length)
             data = json.loads(data.decode("utf-8"))
-            result = Schema.execute(data["query"])
+            result = schema.execute(data["query"])
             self.response_handler(200, result.data)
         else:
             self.response_handler(404, {"Error": "Ruta no existente"})
