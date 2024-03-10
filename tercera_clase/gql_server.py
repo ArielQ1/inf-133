@@ -1,6 +1,6 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
-from graphene import ObjectType, String, Int, List, Schema
+from graphene import ObjectType, String, Int, List, Schema, Field
 
 class Estudiante(ObjectType):
     id = Int()
@@ -9,25 +9,35 @@ class Estudiante(ObjectType):
     carrera = String()
     
 estudiantes = [
-    Estudiante (
-        id = 1,
-        nombre = "Ariel",
-        apellido = "Quizaya",
-        carrera = "Ingenieria de Sistemas"
-    ),
-    Estudiante (
-        id = 2,
-        nombre = "Pedrito",
-        apellido = "Garcia",
-        carrera = "Arquitectura"
-    ),
+    Estudiante(id=1, nombre="Ariel", apellido="Quizaya", carrera="Ingeniería de Sistemas"),
+    Estudiante(id=2, nombre="Pedrito", apellido="Lopez", carrera="Arquitectura"),
+    Estudiante(id=3, nombre="Ariel", apellido="Callisaya", carrera="Diseno Grafico"),
+    Estudiante(id=4, nombre="Pedrito", apellido="Quispe", carrera="Produccion"),
+    Estudiante(id=5, nombre="Ariel", apellido="Yujra", carrera="Medicina"),
+    Estudiante(id=6, nombre="Pedrito", apellido="Mamani", carrera="Enfermeria"),
 ]
 
 class Query(ObjectType):
     estudiantes = List(Estudiante)
+    estudiante = Field(Estudiante, id=Int())
+    estu = Field(Estudiante, carrera=String(), nombre= String())
     
+    def resolve_estu(root, info, c, n):
+        print("entre")
+        for estudiante in estudiantes:
+            print("entreee")
+            if estudiante.carrera == c and estudiante.nombre == n:
+                return estudiante
+        return None
+
     def resolve_estudiantes(root, info):
         return estudiantes
+
+    def resolve_estudiante(root, info, id):
+        for estudiante in estudiantes:
+            if estudiante.id == id: 
+                return estudiante
+        return None
     
 schema = Schema(query=Query)
     
