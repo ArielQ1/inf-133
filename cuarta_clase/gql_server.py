@@ -25,14 +25,15 @@ class Query(ObjectType):
     estu = Field(Estudiante, carrera=String(), nombre= String())
     
     def resolve_estudiantes1(root, info, carrera):
-        listita = List()
+        listita = []
         for estudiante in estudiantes:
+            print(estudiante)
             if estudiante.carrera == carrera:
-                print(estudiante)
-                listita = estudiante
-                print(listita)
-                print(estudiante)
-        return None
+                listita.append(estudiante)
+        if not listita:
+            return None
+        else:
+            return listita
     
     def resolve_estudiante1(root, info, nombre, apellido):
         for estudiante in estudiantes:
@@ -40,9 +41,9 @@ class Query(ObjectType):
                 return estudiante
         return None
     
-    def resolve_estu(root, info, c, n):
+    def resolve_estu(root, info, carrera, nombre):
         for estudiante in estudiantes:
-            if estudiante.carrera == c and estudiante.nombre == n:
+            if estudiante.carrera == carrera and estudiante.nombre == nombre:
                 return estudiante
         return None
 

@@ -4,7 +4,7 @@ import requests
 query = '''
     {
         estudiantes1(carrera: "Arquitectura"){
-            nombre
+            id
         }
     }
 '''
