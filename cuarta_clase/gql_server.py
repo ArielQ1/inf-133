@@ -1,6 +1,6 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
-from graphene import ObjectType, String, Int, List, Schema, Field
+from graphene import Mutation, ObjectType, String, Int, List, Schema, Field
 
 class Estudiante(ObjectType):
     id = Int()
@@ -56,7 +56,43 @@ class Query(ObjectType):
                 return estudiante
         return None
     
-schema = Schema(query=Query)
+class CrearEstudiante(Mutation):
+    class Arguments:
+        nombre = String()
+        apellido = String()
+        carrera = String()
+
+    estudiante = Field(Estudiante)
+
+    def mutate(root, info, nombre, apellido, carrera):
+        nuevo_estudiante = Estudiante(
+            id=len(estudiantes) + 1, 
+            nombre=nombre, 
+            apellido=apellido, 
+            carrera=carrera
+        )
+        estudiantes.append(nuevo_estudiante)
+
+        return CrearEstudiante(estudiante=nuevo_estudiante)
+
+class DeleteEstudiante(Mutation):
+    class Arguments:
+        id = Int()
+
+    estudiante = Field(Estudiante)
+
+    def mutate(root, info, id):
+        for i, estudiante in enumerate(estudiantes):
+            if estudiante.id == id:
+                estudiantes.pop(i)
+                return DeleteEstudiante(estudiante=estudiante)
+        return None
+
+class Mutations(ObjectType):
+    crear_estudiante = CrearEstudiante.Field()
+    delete_estudiante = DeleteEstudiante.Field()
+    
+schema = Schema(query=Query, mutation=Mutations)
     
 class GraphQLRequestHandler(BaseHTTPRequestHandler):
     def response_handler(self, status, data):
