@@ -87,10 +87,25 @@ class DeleteEstudiante(Mutation):
                 estudiantes.pop(i)
                 return DeleteEstudiante(estudiante=estudiante)
         return None
+    
+class ActualizarEstudiante(Mutation):
+    class Arguments:
+        id = Int()
+        carrera = String()
+        
+    estudiante = Field(Estudiante)
+    
+    def mutate(root, info, id, carrera):
+        for estudiante in estudiantes:
+            if estudiante.id == id:
+                estudiante.carrera = carrera
+                return ActualizarEstudiante(estudiante=estudiante)
+        return None
 
 class Mutations(ObjectType):
     crear_estudiante = CrearEstudiante.Field()
     delete_estudiante = DeleteEstudiante.Field()
+    actualizar_estudinate = ActualizarEstudiante.Field()
     
 schema = Schema(query=Query, mutation=Mutations)
     

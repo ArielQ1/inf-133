@@ -42,7 +42,7 @@ print(response.text)
 
 # Definir la consulta GraphQL para eliminar un estudiante
 query_eliminar = """
-mutation {
+    mutation {
         deleteEstudiante(id: 3) {
             estudiante {
                 id
@@ -55,6 +55,26 @@ mutation {
 """
 
 response_mutation = requests.post(url, json={'query': query_eliminar})
+print(response_mutation.text)
+
+# Lista de todos los estudiantes
+response = requests.post(url, json={'query': query_lista})
+print(response.text)
+
+#Actualizar Estudiante
+query_actualizar = '''
+    mutation {
+        actualizarEstudiante(id: 1, carrera: "Antropologia"){
+            estudiante {
+                id
+                nombre
+                apellido
+                carrera
+            }
+        }
+    }
+'''
+response_mutation = requests.post(url, json={'query':query_actualizar})
 print(response_mutation.text)
 
 # Lista de todos los estudiantes
