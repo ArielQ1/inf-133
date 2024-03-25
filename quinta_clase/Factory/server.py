@@ -24,6 +24,9 @@ class Drone(DeliveryVehicle):
     def __init__(self):
         super().__init__(capacity=20)
 
+class Scout(DeliveryVehicle):
+    def __init__(self):
+        super().__init__(capacity=5)
 
 class DeliveryFactory:
     def create_delivery_vehicle(self, vehicle_type):
@@ -31,6 +34,8 @@ class DeliveryFactory:
             return Motorcycle()
         elif vehicle_type == "drone":
             return Drone()
+        elif vehicle_type == "scout":
+            return Scout()
         else:
             raise ValueError("Tipo de vehículo de entrega no válido")
 
