@@ -77,7 +77,47 @@ cursor = conn.execute("SELECT * FROM PEDIDOS")
 for row in cursor:
     print(row)
 
+# Actualizar el precio del plato id 2
+conn.execute(
+    """
+    UPDATE PLATOS
+    SET precio = 9.99
+    WHERE id = 2
+    """
+)
+#Cambia la categoria del plato con id 3
+conn.execute(
+    """
+    UPDATE PLATOS
+    SET categoria = 'Fusión'
+    WHERE id = 3
+    """
+)
+#Elimina el plato con id 4 
+conn.execute(
+    """
+    DELETE FROM PLATOS
+    WHERE id = 4
+    """
+)
+#Elimina el pedido con id 3
+conn.execute(
+    """
+    DELETE FROM PEDIDOS
+    WHERE id = 3
+    """
+)
 
+# Consultar datos
+print("\nPlatos:")
+cursor = conn.execute("SELECT * FROM PLATOS")
+for row in cursor:
+    print(row)
+    
+print("\nPedidos")
+cursor = conn.execute("SELECT * FROM PEDIDOS")
+for row in cursor:
+    print(row)
 
 
 
