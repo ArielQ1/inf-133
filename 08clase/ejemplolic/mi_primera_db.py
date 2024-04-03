@@ -148,6 +148,8 @@ for row in cursor:
     print(row)
     
     
+#Guarda Informacion
+conn.commit()
 
 # Cerrar conexión
 conn.close()
