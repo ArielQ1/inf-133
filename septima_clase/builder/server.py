@@ -89,10 +89,10 @@ class TacoService:
         else:
             return None
     def delete_taco(self, index):
-        if index in tacos:
-            return tacos.pop(index)
-        else:
-            return None
+            if index in tacos:
+                return tacos.pop(index)
+            else:
+                return None
 class HTTPDataHandler:
     @staticmethod
     def handle_response(handler, status, data):

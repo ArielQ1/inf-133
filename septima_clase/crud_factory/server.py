@@ -66,7 +66,7 @@ class ChocolateService:
         )        
         
         chocolates[len(chocolates) + 1] = factory_chocolate
-        return factory_chocolate
+        
 
     def list_chocolates(self):
         return {index: chocolate.__dict__ for index, chocolate in chocolates.items()}
