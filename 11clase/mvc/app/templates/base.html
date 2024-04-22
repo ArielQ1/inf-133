@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVC</title>
+</head>
+<body>
+    <h1>MVC</h1>
+    <nav>
+        <a href="{{ url_for('user.registro') }}">Registrar Usuario</a> |
+        <a href="{{ url_for('user.usuarios') }}">Lista de Usuarios</a> 
+        
+    </nav>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
