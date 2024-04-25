@@ -11,6 +11,9 @@
                         <div class="content">
                             <p><strong>Nombre: {{ user.first_name }} </strong></p>
                             <p><strong>Apellido: {{ user.last_name }}</strong></p>
+                            <p><strong>Email: {{ user.email }}</strong></p>
+                            <p><strong>Password: {{ user.password }}</strong></p>
+                            <p><strong>Birthdate: {{ user.birthdate }}</strong></p>
                             <div class="buttons">
                                 <a href="{{ url_for('user.actualizar', id=user.id) }}" 
                                 class="button is-info">Editar</a>

@@ -70,9 +70,15 @@ def actualizar(id):
     # Obtenemos los datos del formulario
     first_name = request.form["first_name"]
     last_name = request.form["last_name"]
+    email = request.form["email"]
+    password = request.form["password"]
+    birthdate = request.form["birthdate"]
     # Actualizamos los datos del usuario
     user.first_name = first_name
     user.last_name = last_name
+    user.email = email
+    user.password = password
+    user.birthdate = birthdate
     # Guardamos los cambios
     user.update()
     return redirect(url_for("user.usuarios"))
