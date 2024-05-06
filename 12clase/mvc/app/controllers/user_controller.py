@@ -62,7 +62,7 @@ def obtener_usuario(id):
 # Ya estamos en la vista de actualizar
 # por lo que obtenemos los datos del formulario
 # y actualizamos la información del usuario
-@user_bp.route("/users/<int:id>", methods=["POST"])
+@user_bp.route("/users/<int:id>/update", methods=["GET","POST"])
 def actualizar(id):
     user = User.get_by_id(id)
     if not user:
@@ -82,3 +82,6 @@ def actualizar(id):
     # Guardamos los cambios
     user.update()
     return redirect(url_for("user.usuarios"))
+@user_bp.route("/users/<int:id>/delete")
+def delete__user(id):
+    pass
