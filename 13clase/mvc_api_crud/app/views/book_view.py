@@ -1,6 +1,7 @@
 def render_book_list(books):
     return[
         {
+            "id": book.id,
             "title": book.title,
             "author": book.author,
             "edition": book.edition,
@@ -9,7 +10,7 @@ def render_book_list(books):
         for book in books
     ]
 
-def render_book_details(book):
+def render_book_detail(book):
     return {
         "id": book.id,
         "title": book.title,
