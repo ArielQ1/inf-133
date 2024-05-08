@@ -26,20 +26,20 @@ print("\nLista de Libros:")
 print(response.json())
 
 # Obtener un libro específico por su ID (por ejemplo, ID=1)
-url = f"{BASE_URL}/books/1"
+url = f"{BASE_URL}/books/3"
 response = requests.get(url, headers=headers)
 print("\nDetalles del libro con ID 1:")
 print(response.json())
 
 # Actualizar un animal existente por su ID (por ejemplo, ID=1)
-url = f"{BASE_URL}/books/2"
+url = f"{BASE_URL}/books/4"
 datos_actualizacion = {"title": "act", "author": "act", "edition": "act", "availability": "act"}
 response = requests.put(url, json=datos_actualizacion, headers=headers)
 print("\nActualizando el libro con ID 1:")
 print(response.json())
 
 # Eliminar un animal existente por su ID (por ejemplo, ID=1)
-url = f"{BASE_URL}/books/1"
+url = f"{BASE_URL}/books/5"
 response = requests.delete(url, headers=headers)
 print("\nEliminando el libro con ID 1:")
 if response.status_code == 204:

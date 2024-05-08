@@ -12,7 +12,7 @@ def get_books():
     return jsonify(render_book_list(books))
 
 
-#Ruta para obtener un animal especifico por id 
+#Ruta para obtener un libro especifico por id 
 @book_bp.route("/books/<int:id>", methods=["GET"])
 def get_book(id):
     book = Book.get_by_id(id)
