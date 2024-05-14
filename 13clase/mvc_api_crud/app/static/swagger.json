@@ -8,6 +8,11 @@
         "/api/books": {
             "get": {
                 "summary": "Obtiene la lista de todos los libros",
+                "security": [
+                    {
+                        "JWTAuth":[]
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Lista de libros",
@@ -26,6 +31,11 @@
             },
             "post": {
                 "summary": "Crea un nuevo libro",
+                "security": [
+                    {
+                        "JWTAuth":[]
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -52,6 +62,11 @@
         "/api/books/{id}": {
             "get": {
                 "summary": "Obtiene un libro específico por su ID",
+                "security":[
+                    {
+                        "JWTAuth":[]
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -80,6 +95,11 @@
             },
             "put": {
                 "summary": "Actualiza un libro existente por su ID",
+                "security":[
+                    {
+                        "JWTAuth":[]
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -117,6 +137,11 @@
             },
             "delete": {
                 "summary": "Elimina un libro existente por su ID",
+                "security":[
+                    {
+                        "JWTAuth":[]
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -136,9 +161,73 @@
                     }
                 }
             }
+        },
+        "/api/register":{
+            "post":{
+                "summary":"Registra un nuevo usuario",
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description":"usuario creado"
+                    },
+                    "400":{
+                        "description":"Solicitud incorrecta"
+                    }
+                }
+            }
+        },
+        "/api/login":{
+            "post":{
+                "summary":"Inicia sesion con un usuario existente",
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200": {
+                        "description": "Inicio de sesión exitoso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "properties":{
+                                        "access_token":{
+                                            "type":"string",
+                                            "description":"Token de acceso JWT para el usuario"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description":"Credenciales invalidas"
+                    }
+                }
+            }
         }
     },
     "components": {
+        "securitySchemes":{
+            "JWTAuth": {
+                "type":"http",
+                "scheme":"bearer",
+                "bearerFormat":"JWT"
+            }
+        },
         "schemas": {
             "Book": {
                 "type": "object",
@@ -165,6 +254,34 @@
                     "author",
                     "edition",
                     "availability"
+                ]
+            },
+            "User":{
+                "type":"object",
+                "properties": {
+                    "username": {
+                        "type":"string"
+                    },
+                    "password": {
+                        "type":"string"
+                    }
+                },
+                "required": [
+                    "username", "password"
+                ]
+            },
+            "Login":{
+                "type":"object",
+                "properties":{
+                    "username":{
+                        "type":"string"
+                    },
+                    "password":{
+                        "type":"string"
+                    }
+                },
+                "required":[
+                    "username", "password"
                 ]
             }
             

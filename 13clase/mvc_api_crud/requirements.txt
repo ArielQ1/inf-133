@@ -1,2 +1,4 @@
 flask
 flask-sqlalchemy
+Flask-Login
+Flask-JWT-Extendend
