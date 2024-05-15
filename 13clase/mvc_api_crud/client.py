@@ -46,3 +46,5 @@ if response.status_code == 204:
     print(f"Libro con ID 1 eliminado con éxito.")
 else:
     print(f"Error: {response.status_code} - {response.text}")
+
+#eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxNTc3NDI3NCwianRpIjoiZjY4MGMxNTEtYTc0NC00Y2IxLWJkMzQtOWI0MjdkODIxNmI4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFxdWl6YXlhMSIsIm5iZiI6MTcxNTc3NDI3NCwiY3NyZiI6ImUzZDM4YzYxLTVhNTgtNDY1MS1hYTk5LWU0ZThmY2Q5NzkxMiIsImV4cCI6MTcxNTc3NTE3NH0.nBFhDlHWHCqeCflkriqW-UcEPj6rjxRwlIqe8mriIag
