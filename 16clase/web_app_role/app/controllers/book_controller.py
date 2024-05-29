@@ -24,12 +24,12 @@ def create_book():
         if current_user.has_role("admin"):
             title = request.form["title"]
             author = request.form["author"]
-            edition = int(request.form["edition"])
+            edition = request.form["edition"]
             availability = request.form["availability"]
             book = Book(title=title, author=author, edition=edition, availability=availability)
             book.save()
             flash("Libro creado exitosamente", "success")
-            return redirect(url_for("books.list_books"))
+            return redirect(url_for("book.list_books"))
         else:
             return jsonify({"message": "Unauthorized"}), 403
     return book_view.create_book()
@@ -43,16 +43,13 @@ def update_books(id):
     if not book:
         return "Libro no encontrado", 404
     if request.method == "POST":
-        if current_user.has_role("admin"):
-            title = request.form["title"]
-            author = request.form["author"]
-            edition = int(request.form["edition"])
-            availability = request.form["availability"]
-            book = Book(title=title, author=author, edition=edition, availability=availability)
-            flash("Libro actualizado exitosamente", "success")
-            return redirect(url_for("book.list_books"))
-        else:
-            return jsonify({"message": "Unauthorized"}), 403
+        title = request.form["title"]
+        author = request.form["author"]
+        edition = request.form["edition"]
+        availability = request.form["availability"]
+        book.update(title=title, author=author, edition=edition, availability=availability)
+        flash("Libro actualizado exitosamente", "success")
+        return redirect(url_for("book.list_books"))
     return book_view.update_book(book)
 
 

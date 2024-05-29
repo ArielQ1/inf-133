@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
-from controllers.book_controller import book_bp
-from controllers.user_controller import user_bp
-from database import db
+from app.controllers.book_controller import book_bp
+from app.controllers.user_controller import user_bp
+from app.database import db
 from flask_swagger_ui import get_swaggerui_blueprint
 
 
