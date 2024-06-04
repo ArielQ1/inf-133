@@ -1,4 +1,6 @@
 import pytest
+from app.models.user_model import User
+
 
 @pytest.fixture
 def new_user():
